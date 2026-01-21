@@ -1,0 +1,21 @@
+input:
+  name: "&eEnter &6NAME&e:"
+  surname: "&eEnter &6SURNAME&e:"
+  age: "&eEnter &6AGE&e:"
+  region: "&eEnter &6REGION&e:"
+
+errors:
+  age-not-number: "&cAge must be a number!"
+  no-permission: "&cYou don't have permission!"
+  player-not-found: "&cPlayer not found!"
+  no-passport: "&cPassport not found!"
+
+success:
+  created: "&aPassport successfully created!"
+  reloaded: "<gradient:#00ff99:#00ccff>Language and config reloaded!</gradient>"
+
+help:
+  title: "&6&lPassportPlugin"
+  passport: "&e/passport &7— open your passport"
+  check: "&e/passport check <player> &7— view player's passport"
+  reload: "&e/passport reload &7— reload config and language"

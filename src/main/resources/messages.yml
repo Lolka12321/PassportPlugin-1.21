@@ -1,0 +1,20 @@
+input:
+  name: "&eВведите &6ИМЯ&e:"
+  surname: "&eВведите &6ФАМИЛИЮ&e:"
+  age: "&eВведите &6ВОЗРАСТ&e:"
+  region: "&eВведите &6РЕГИОН&e:"
+
+errors:
+  age-not-number: "&cВозраст должен быть числом!"
+  no-permission: "&cУ вас нет прав!"
+  player-not-found: "&cИгрок не найден!"
+  no-passport: "&cПаспорт не найден!"
+
+success:
+  created: "&aПаспорт успешно создан!"
+  reloaded: "<gradient:#00ff99:#00ccff>Конфигурация и локализация перезагружены!</gradient>"
+
+usage:
+  passport: "&7/passport"
+  passport-check: "&7/passport check <player>"
+  passport-reload: "&7/passport reload"

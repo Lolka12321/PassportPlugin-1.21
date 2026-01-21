@@ -1,0 +1,14 @@
+name: PassportPlugin
+version: 1.0
+main: fellangera.passport.PassportPlugin
+api-version: 1.21
+
+commands:
+  passport:
+    description: Passport
+
+permissions:
+  passport.check:
+    default: op
+  passport.reload:
+    default: op
