@@ -19,3 +19,20 @@ help:
   passport: "&e/passport &7— open your passport"
   check: "&e/passport check <player> &7— view player's passport"
   reload: "&e/passport reload &7— reload config and language"
+
+book:
+  title: "&6Passport"
+  author: "&7Government"
+  pages:
+    - |
+      &6&lPASSPORT
+
+      &fName: &e%name%
+      &fSurname: &e%surname%
+
+      &fAge: &e%age%
+      &fRegion: &e%region%
+
+
+      &7Series: &f%series%
+      &7Number: &f%number%
