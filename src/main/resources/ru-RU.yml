@@ -19,3 +19,20 @@ help:
   passport: "&e/passport &7— открыть свой паспорт"
   check: "&e/passport check <player> &7— посмотреть паспорт игрока"
   reload: "&e/passport reload &7— перезагрузить конфиг и язык"
+
+book:
+  title: "&6Паспорт"
+  author: "&7Государство"
+  pages:
+    - |
+      &6&lПАСПОРТ
+
+      &fИмя: &e%name%
+      &fФамилия: &e%surname%
+
+      &fВозраст: &e%age%
+      &fРегион: &e%region%
+
+
+      &7Серия: &f%series%
+      &7Номер: &f%number%
