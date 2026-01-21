@@ -2,18 +2,4 @@ language: "en-EN"
 
 passport:
   book:
-    title: "&6Passport"
-    author: "&7Government"
-    pages:
-      - |
-        &6&lPASSPORT
-
-        &fName: &e%name%
-        &fSurname: &e%surname%
-
-        &fAge: &e%age%
-        &fRegion: &e%region%
-
-
-        &7Series: &f%series%
-        &7Number: &f%number%
+    use-language-file: true
