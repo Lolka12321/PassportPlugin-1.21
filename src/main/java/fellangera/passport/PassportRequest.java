@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,34 +29,37 @@ public class PassportRequest {
     public void sendRequest(Player requester, Player target) {
         UUID targetId = target.getUniqueId();
 
-        // Удаляем предыдущий запрос если есть
+        // Remove previous request if exists
         if (activeRequests.containsKey(targetId)) {
-            activeRequests.get(targetId).cancel();
+            Request oldRequest = activeRequests.get(targetId);
+            oldRequest.cancel();
+            activeRequests.remove(targetId);
         }
 
         Request request = new Request(requester, target);
         activeRequests.put(targetId, request);
 
-        // Отправляем сообщение цели
-        String message = plugin.lang().getString("request.question")
+        // Send message to target
+        String message = plugin.lang().getString("request.question", "")
                 .replace("%player%", requester.getName());
         target.sendMessage(ColorUtil.toComponent(message));
 
-        // Создаем интерактивные кнопки
-        Component accept = ColorUtil.toComponent(plugin.lang().getString("request.accept-button"))
+        // Create interactive buttons
+        Component accept = ColorUtil.toComponent(plugin.lang().getString("request.accept-button", "ACCEPT"))
                 .clickEvent(ClickEvent.runCommand("/passport accept"));
-        Component deny = ColorUtil.toComponent(plugin.lang().getString("request.deny-button"))
+        Component deny = ColorUtil.toComponent(plugin.lang().getString("request.deny-button", "DENY"))
                 .clickEvent(ClickEvent.runCommand("/passport deny"));
 
         target.sendMessage(Component.text("  ").append(accept).append(Component.text("   ")).append(deny));
 
-        // Сообщение запросившему
+        // Message to requester
         requester.sendMessage(ColorUtil.toComponent(
-                plugin.lang().getString("request.sent").replace("%player%", target.getName())
+                plugin.lang().getString("request.sent", "Request sent")
+                        .replace("%player%", target.getName())
         ));
 
-        // Таймаут через 30 секунд
-        new BukkitRunnable() {
+        // Timeout after 30 seconds
+        BukkitTask timeoutTask = new BukkitRunnable() {
             @Override
             public void run() {
                 if (activeRequests.containsKey(targetId)) {
@@ -63,6 +67,8 @@ public class PassportRequest {
                 }
             }
         }.runTaskLater(plugin, 30 * 20L);
+
+        request.setTimeoutTask(timeoutTask);
     }
 
     public boolean acceptRequest(Player target) {
@@ -70,7 +76,8 @@ public class PassportRequest {
         Request request = activeRequests.remove(targetId);
 
         if (request == null) {
-            target.sendMessage(ColorUtil.toComponent(plugin.lang().getString("request.no-active")));
+            target.sendMessage(ColorUtil.toComponent(
+                    plugin.lang().getString("request.no-active", "No active requests")));
             return false;
         }
 
@@ -78,19 +85,22 @@ public class PassportRequest {
         Player requester = request.requester;
 
         if (!requester.isOnline()) {
-            target.sendMessage(ColorUtil.toComponent(plugin.lang().getString("request.requester-offline")));
+            target.sendMessage(ColorUtil.toComponent(
+                    plugin.lang().getString("request.requester-offline", "Requester is offline")));
             return false;
         }
 
-        target.sendMessage(ColorUtil.toComponent(plugin.lang().getString("request.accepted")));
+        target.sendMessage(ColorUtil.toComponent(
+                plugin.lang().getString("request.accepted", "You showed your passport")));
         requester.sendMessage(ColorUtil.toComponent(
-                plugin.lang().getString("request.target-accepted").replace("%player%", target.getName())
+                plugin.lang().getString("request.target-accepted", "Request accepted")
+                        .replace("%player%", target.getName())
         ));
 
-        // Открываем паспорт запросившему игроку
+        // Open passport for requester
         Passport passport = manager.getPassport(target);
         if (passport != null && commandHandler != null) {
-            commandHandler.openPassportBookForRequester(requester, passport);
+            commandHandler.openPassportForRequester(requester, passport);
         }
 
         return true;
@@ -101,18 +111,21 @@ public class PassportRequest {
         Request request = activeRequests.remove(targetId);
 
         if (request == null) {
-            target.sendMessage(ColorUtil.toComponent(plugin.lang().getString("request.no-active")));
+            target.sendMessage(ColorUtil.toComponent(
+                    plugin.lang().getString("request.no-active", "No active requests")));
             return false;
         }
 
         request.cancel();
         Player requester = request.requester;
 
-        target.sendMessage(ColorUtil.toComponent(plugin.lang().getString("request.denied")));
+        target.sendMessage(ColorUtil.toComponent(
+                plugin.lang().getString("request.denied", "You denied the request")));
 
         if (requester.isOnline()) {
             requester.sendMessage(ColorUtil.toComponent(
-                    plugin.lang().getString("request.target-denied").replace("%player%", target.getName())
+                    plugin.lang().getString("request.target-denied", "Request denied")
+                            .replace("%player%", target.getName())
             ));
         }
 
@@ -126,12 +139,13 @@ public class PassportRequest {
         request.cancel();
 
         if (request.target.isOnline()) {
-            request.target.sendMessage(ColorUtil.toComponent(plugin.lang().getString("request.timeout")));
+            request.target.sendMessage(ColorUtil.toComponent(
+                    plugin.lang().getString("request.timeout", "Request expired")));
         }
 
         if (request.requester.isOnline()) {
             request.requester.sendMessage(ColorUtil.toComponent(
-                    plugin.lang().getString("request.timeout-requester")
+                    plugin.lang().getString("request.timeout-requester", "No response")
                             .replace("%player%", request.target.getName())
             ));
         }
@@ -140,14 +154,21 @@ public class PassportRequest {
     private static class Request {
         final Player requester;
         final Player target;
+        private BukkitTask timeoutTask;
 
         Request(Player requester, Player target) {
             this.requester = requester;
             this.target = target;
         }
 
+        void setTimeoutTask(BukkitTask task) {
+            this.timeoutTask = task;
+        }
+
         void cancel() {
-            // Дополнительная логика отмены если нужно
+            if (timeoutTask != null && !timeoutTask.isCancelled()) {
+                timeoutTask.cancel();
+            }
         }
     }
 }
