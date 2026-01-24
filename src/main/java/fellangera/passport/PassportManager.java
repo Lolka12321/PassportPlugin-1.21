@@ -13,18 +13,22 @@ import java.util.concurrent.ThreadLocalRandom;
 public class PassportManager {
 
     private final Map<UUID, Passport> passports = new HashMap<>();
-    private final Set<String> usedIds = new HashSet<>();
+    private final Map<String, Set<Integer>> usedNumbers = new HashMap<>();
     private final File file;
     private final FileConfiguration config;
+    private final PassportPlugin plugin;
 
     public PassportManager(PassportPlugin plugin) {
+        this.plugin = plugin;
         file = new File(plugin.getDataFolder(), "passports.yml");
         try {
             if (!file.exists()) {
                 plugin.getDataFolder().mkdirs();
                 file.createNewFile();
             }
-        } catch (IOException ignored) {}
+        } catch (IOException e) {
+            plugin.getLogger().severe("Failed to create passports.yml: " + e.getMessage());
+        }
         config = YamlConfiguration.loadConfiguration(file);
         load();
     }
@@ -37,22 +41,61 @@ public class PassportManager {
         return passports.get(p.getUniqueId());
     }
 
-    public PassportId generateUniqueId() {
-        while (true) {
-            String s = "" + (char)('A' + r()) + (char)('A' + r());
-            int n = ThreadLocalRandom.current().nextInt(100000, 1000000);
-            String key = s + "-" + n;
-            if (!usedIds.contains(key)) return new PassportId(s, n);
+    public PassportId generateUniqueId(String countryName) {
+        String series = getCountrySeries(countryName);
+        if (series == null) {
+            series = "XX";
         }
+
+        usedNumbers.putIfAbsent(series, new HashSet<>());
+        Set<Integer> numbers = usedNumbers.get(series);
+
+        int maxAttempts = 1000;
+        int attempts = 0;
+
+        while (attempts < maxAttempts) {
+            int n = ThreadLocalRandom.current().nextInt(100000, 1000000);
+
+            if (!numbers.contains(n)) {
+                numbers.add(n);
+                return new PassportId(series, n);
+            }
+            attempts++;
+        }
+
+        plugin.getLogger().warning("Failed to generate unique passport ID after " + maxAttempts + " attempts");
+        int n = ThreadLocalRandom.current().nextInt(100000, 1000000);
+        return new PassportId(series, n);
     }
 
-    private int r() {
-        return ThreadLocalRandom.current().nextInt(26);
+    private String getCountrySeries(String countryName) {
+        var countries = plugin.getConfig().getConfigurationSection("countries");
+        if (countries == null) return null;
+
+        for (String key : countries.getKeys(false)) {
+            String name = plugin.getConfig().getString("countries." + key + ".name");
+            if (name != null && name.equals(countryName)) {
+                return plugin.getConfig().getString("countries." + key + ".series");
+            }
+        }
+        return null;
     }
 
     public void setPassport(Player p, Passport passport) {
+        Passport oldPassport = passports.get(p.getUniqueId());
+
+        if (oldPassport != null) {
+            Set<Integer> oldNumbers = usedNumbers.get(oldPassport.getSeries());
+            if (oldNumbers != null) {
+                oldNumbers.remove(oldPassport.getNumber());
+            }
+        }
+
         passports.put(p.getUniqueId(), passport);
-        usedIds.add(passport.getSeries() + "-" + passport.getNumber());
+
+        usedNumbers.putIfAbsent(passport.getSeries(), new HashSet<>());
+        usedNumbers.get(passport.getSeries()).add(passport.getNumber());
+
         String k = p.getUniqueId().toString();
         config.set(k + ".name", passport.getName());
         config.set(k + ".surname", passport.getSurname());
@@ -61,6 +104,7 @@ public class PassportManager {
         config.set(k + ".series", passport.getSeries());
         config.set(k + ".number", passport.getNumber());
         save();
+
         applyName(p, passport);
     }
 
@@ -69,11 +113,13 @@ public class PassportManager {
         Passport passport = passports.remove(uuid);
 
         if (passport != null) {
-            usedIds.remove(passport.getSeries() + "-" + passport.getNumber());
+            Set<Integer> numbers = usedNumbers.get(passport.getSeries());
+            if (numbers != null) {
+                numbers.remove(passport.getNumber());
+            }
             config.set(uuid.toString(), null);
             save();
 
-            // Сбрасываем отображаемое имя
             p.displayName(Component.text(p.getName()));
             p.playerListName(Component.text(p.getName()));
             p.customName(null);
@@ -91,22 +137,34 @@ public class PassportManager {
 
     private void load() {
         for (String k : config.getKeys(false)) {
-            UUID u = UUID.fromString(k);
-            String s = config.getString(k + ".series");
-            int n = config.getInt(k + ".number");
-            passports.put(u, new Passport(
-                    config.getString(k + ".name"),
-                    config.getString(k + ".surname"),
-                    config.getInt(k + ".age"),
-                    config.getString(k + ".region"),
-                    s, n
-            ));
-            usedIds.add(s + "-" + n);
+            try {
+                UUID u = UUID.fromString(k);
+                String s = config.getString(k + ".series");
+                int n = config.getInt(k + ".number");
+                String name = config.getString(k + ".name");
+                String surname = config.getString(k + ".surname");
+                int age = config.getInt(k + ".age");
+                String region = config.getString(k + ".region");
+
+                if (s != null && name != null && surname != null && region != null) {
+                    passports.put(u, new Passport(name, surname, age, region, s, n));
+                    usedNumbers.putIfAbsent(s, new HashSet<>());
+                    usedNumbers.get(s).add(n);
+                } else {
+                    plugin.getLogger().warning("Invalid passport data for UUID: " + k);
+                }
+            } catch (IllegalArgumentException e) {
+                plugin.getLogger().warning("Invalid UUID in passports.yml: " + k);
+            }
         }
     }
 
     private void save() {
-        try { config.save(file); } catch (IOException ignored) {}
+        try {
+            config.save(file);
+        } catch (IOException e) {
+            plugin.getLogger().severe("Failed to save passports.yml: " + e.getMessage());
+        }
     }
 
     public record PassportId(String series, int number) {}
