@@ -64,6 +64,23 @@ public class PassportManager {
         applyName(p, passport);
     }
 
+    public void removePassport(Player p) {
+        UUID uuid = p.getUniqueId();
+        Passport passport = passports.remove(uuid);
+
+        if (passport != null) {
+            usedIds.remove(passport.getSeries() + "-" + passport.getNumber());
+            config.set(uuid.toString(), null);
+            save();
+
+            // Сбрасываем отображаемое имя
+            p.displayName(Component.text(p.getName()));
+            p.playerListName(Component.text(p.getName()));
+            p.customName(null);
+            p.setCustomNameVisible(false);
+        }
+    }
+
     public void applyName(Player p, Passport passport) {
         Component c = Component.text(passport.getName() + ", " + passport.getAge());
         p.displayName(c);
