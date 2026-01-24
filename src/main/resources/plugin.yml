@@ -2,19 +2,65 @@ name: PassportPlugin
 version: 1.0
 main: fellangera.passport.PassportPlugin
 api-version: 1.21
+author: Lolka12321
 
 commands:
   passport:
-    description: Passport management system
-    usage: /passport [help|check|remove|reload]
+    description: Passport management system with AnvilGUI
+    usage: /passport [help|create|edit|check|remove|reload]
 
 permissions:
+  passport.*:
+    description: Gives access to all passport commands
+    default: true
+    children:
+      passport.view: true
+      passport.create: true
+      passport.edit: true
+      passport.help: true
+      passport.accept: true
+      passport.deny: true
+
+  passport.admin:
+    description: Gives access to all admin commands
+    default: op
+    children:
+      passport.check: true
+      passport.remove: true
+      passport.reload: true
+
+  passport.view:
+    description: View your own passport
+    default: true
+
+  passport.create:
+    description: Create a new passport
+    default: true
+
+  passport.edit:
+    description: Edit your passport
+    default: true
+
+  passport.help:
+    description: View help menu
+    default: true
+
+  passport.accept:
+    description: Accept passport view request
+    default: true
+
+  passport.deny:
+    description: Deny passport view request
+    default: true
+
   passport.check:
     description: Request to view other player's passport
     default: op
+
   passport.remove:
     description: Remove player's passport
     default: op
+
   passport.reload:
     description: Reload plugin configuration and language
     default: op
