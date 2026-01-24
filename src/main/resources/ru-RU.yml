@@ -1,38 +1,63 @@
 input:
-  name: "&eВведите &6ИМЯ&e:"
-  surname: "&eВведите &6ФАМИЛИЮ&e:"
-  age: "&eВведите &6ВОЗРАСТ&e:"
-  region: "&eВведите &6РЕГИОН&e:"
+  name: "<gradient:#A78BFA:#EC4899>Введите ваше</gradient> <gradient:#FBBF24:#F59E0B>ИМЯ</gradient><gradient:#A78BFA:#EC4899>:</gradient>"
+  surname: "<gradient:#A78BFA:#EC4899>Введите вашу</gradient> <gradient:#FBBF24:#F59E0B>ФАМИЛИЮ</gradient><gradient:#A78BFA:#EC4899>:</gradient>"
+  age: "<gradient:#A78BFA:#EC4899>Введите ваш</gradient> <gradient:#FBBF24:#F59E0B>ВОЗРАСТ</gradient><gradient:#A78BFA:#EC4899>:</gradient>"
+  region: "<gradient:#A78BFA:#EC4899>Введите ваш</gradient> <gradient:#FBBF24:#F59E0B>РЕГИОН</gradient><gradient:#A78BFA:#EC4899>:</gradient>"
 
 errors:
-  age-not-number: "&cВозраст должен быть числом!"
-  no-permission: "&cУ вас нет прав!"
-  player-not-found: "&cИгрок не найден!"
-  no-passport: "&cПаспорт не найден!"
+  age-not-number: "<gradient:#FF6B6B:#EF4444>Возраст должен быть числом!</gradient>"
+  age-range: "<gradient:#FF6B6B:#EF4444>Возраст должен быть от %min% до %max%!</gradient>"
+  invalid-name: "<gradient:#FF6B6B:#EF4444>Некорректное имя! Используйте только буквы, пробелы и дефисы.</gradient>"
+  invalid-surname: "<gradient:#FF6B6B:#EF4444>Некорректная фамилия! Используйте только буквы, пробелы и дефисы.</gradient>"
+  invalid-region: "<gradient:#FF6B6B:#EF4444>Некорректный регион! Используйте только буквы, пробелы и дефисы.</gradient>"
+  no-permission: "<gradient:#FF6B6B:#EF4444>У вас нет прав на использование этой команды!</gradient>"
+  player-not-found: "<gradient:#FF6B6B:#EF4444>Игрок не найден или не в сети!</gradient>"
+  no-passport: "<gradient:#FF6B6B:#EF4444>У вас еще нет паспорта!</gradient>"
+  target-no-passport: "<gradient:#FF6B6B:#EF4444>У игрока %player% нет паспорта!</gradient>"
+  usage-check: "<gradient:#FF6B6B:#EF4444>Использование: /passport check <игрок></gradient>"
+  usage-remove: "<gradient:#FF6B6B:#EF4444>Использование: /passport remove <игрок></gradient>"
 
 success:
-  created: "&aПаспорт успешно создан!"
-  reloaded: "<gradient:#00ff99:#00ccff>Язык и конфигурация перезагружены!</gradient>"
+  created: "<gradient:#4ADE80:#22C55E>Паспорт успешно создан!</gradient>"
+  reloaded: "<gradient:#00ff99:#00ccff>Конфигурация и локализация перезагружены!</gradient>"
+  removed: "<gradient:#4ADE80:#22C55E>Паспорт игрока</gradient> <gradient:#FBBF24:#F59E0B>%player%</gradient> <gradient:#4ADE80:#22C55E>удален!</gradient>"
+  your-passport-removed: "<gradient:#FF6B6B:#EF4444>Ваш паспорт был удален администратором!</gradient>"
+  kicked-for-reregistration: "<gradient:#FF6B6B:#EF4444>Ваш паспорт удален. Перезайдите для создания нового.</gradient>"
 
 help:
-  title: "&6&lPassportPlugin"
-  passport: "&e/passport &7— открыть свой паспорт"
-  check: "&e/passport check <player> &7— посмотреть паспорт игрока"
-  reload: "&e/passport reload &7— перезагрузить конфиг и язык"
+  title: "<gradient:#FBBF24:#F59E0B>&l━━━━━ PassportPlugin ━━━━━</gradient>"
+  passport: "<gradient:#A78BFA:#EC4899>/passport</gradient> <gray>— посмотреть свой паспорт"
+  check: "<gradient:#A78BFA:#EC4899>/passport check <игрок></gradient> <gray>— запросить просмотр паспорта игрока"
+  remove: "<gradient:#A78BFA:#EC4899>/passport remove <игрок></gradient> <gray>— удалить паспорт игрока"
+  reload: "<gradient:#A78BFA:#EC4899>/passport reload</gradient> <gray>— перезагрузить конфиг и язык"
+
+request:
+  question: "<gradient:#FBBF24:#F59E0B>%player%</gradient> <gray>запросил просмотр ваших документов. Показать?"
+  accept-button: "<gradient:#4ADE80:#22C55E>&l[✓ ПОКАЗАТЬ]</gradient>"
+  deny-button: "<gradient:#FF6B6B:#EF4444>&l[✗ ОТКАЗАТЬ]</gradient>"
+  sent: "<gray>Запрос отправлен игроку</gray> <gradient:#FBBF24:#F59E0B>%player%</gradient><gray>. Ожидание ответа..."
+  accepted: "<gradient:#4ADE80:#22C55E>Вы показали свой паспорт.</gradient>"
+  denied: "<gradient:#FF6B6B:#EF4444>Вы отказали в просмотре.</gradient>"
+  target-accepted: "<gradient:#4ADE80:#22C55E>%player%</gradient> <gray>согласился! Открываем паспорт..."
+  target-denied: "<gradient:#FF6B6B:#EF4444>%player%</gradient> <gray>отказал в просмотре документов."
+  no-active: "<gradient:#FF6B6B:#EF4444>У вас нет активных запросов!</gradient>"
+  requester-offline: "<gradient:#FF6B6B:#EF4444>Запросивший игрок не в сети!</gradient>"
+  timeout: "<gradient:#FF6B6B:#EF4444>Запрос на просмотр паспорта истек.</gradient>"
+  timeout-requester: "<gradient:#FF6B6B:#EF4444>%player%</gradient> <gray>не ответил на ваш запрос."
 
 book:
-  title: "&6Паспорт"
-  author: "&7Государство"
+  title: "<gradient:#FBBF24:#F59E0B>Паспорт</gradient>"
+  author: "<gray>Государство"
   pages:
     - |
-      &6&lПАСПОРТ
-
-      &fИмя: &e%name%
-      &fФамилия: &e%surname%
-
-      &fВозраст: &e%age%
-      &fРегион: &e%region%
-
-
-      &7Серия: &f%series%
-      &7Номер: &f%number%
+      <gradient:#FBBF24:#F59E0B>&lПАСПОРТ</gradient>
+      
+      <white>Имя: <gradient:#A78BFA:#EC4899>%name%</gradient>
+      <white>Фамилия: <gradient:#A78BFA:#EC4899>%surname%</gradient>
+      
+      <white>Возраст: <gradient:#FBBF24:#F59E0B>%age%</gradient>
+      <white>Регион: <gradient:#A78BFA:#EC4899>%region%</gradient>
+      
+      
+      <gray>Серия: <white>%series%
+      <gray>Номер: <white>%number%
