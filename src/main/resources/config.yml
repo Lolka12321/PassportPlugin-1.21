@@ -1,3 +1,77 @@
 # PassportPlugin Configuration
-# Supported languages: en-EN, ru-RU
 language: "en-EN"
+
+gui:
+  create:
+    name-slot: 10
+    surname-slot: 12
+    age-slot: 14
+    country-slot: 16
+    confirm-slot: 22
+    cancel-slot: 31
+
+  edit:
+    name-slot: 10
+    surname-slot: 12
+    age-slot: 14
+    country-slot: 16
+    save-slot: 22
+    cancel-slot: 31
+
+  view:
+    name-slot: 10
+    surname-slot: 12
+    age-slot: 14
+    country-slot: 16
+    series-slot: 30
+    number-slot: 32
+
+  country:
+    size: 18
+    back-slot: 17
+
+countries:
+  russia:
+    name: "Russia"
+    series: "RU"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTZlYWZlZjk4MGQ2MTE3ZGFiZTg5ODJhYzRiNDUwOTg4N2UyYzQ2MjFmNmE4ZmU1YzliNzM1YTgzZDc3NWFkIn19fQ=="
+
+  usa:
+    name: "USA"
+    series: "US"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGNhYzk3NzRkYTEyMTcyNDg1MzJjZTE0N2Y3ODMxZjY3YTEyZmRjY2ExY2YwY2I0YjM4NDhkZTZiYzk0YjQifX19"
+
+  germany:
+    name: "Germany"
+    series: "DE"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWU3ODk5YjQ4MDY4NTg2OTdlMjgzZjA4NGQ5MTczZmU0ODc4ODY0NTM3NzQ2MjZiMjRiZDhjZmVjYzc3YjNmIn19fQ=="
+
+  france:
+    name: "France"
+    series: "FR"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjkwMzM0OWZhNDViZGQ4NzEyNmQ5Y2QzYzZjMGFiYmE3ZGJkNmY1NmZiOGQ3ODcwMTg3M2ExZTdjOGVlMzNjZiJ9fX0="
+
+  uk:
+    name: "United Kingdom"
+    series: "UK"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzQzOWQ3ZjljNjdmMzJkY2JiODZiNzAxMGIxZTE0YjYwZGU5Njc3NmEzNWY2MWNlZTk4MjY2MGFhY2Y1MjY0YiJ9fX0="
+
+  china:
+    name: "China"
+    series: "CN"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2Y5YmMwMzVjZGM4MGYxYWI1ZTExOThmMjlmM2FkM2ZkZDJiNDJkOWE2OWFlYjY0ZGU5OTA2ODE4MDBiOThkYyJ9fX0="
+
+  japan:
+    name: "Japan"
+    series: "JP"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDY0MGFlNDY2MTYyYTQ3ZDNlZTMzYzQwNzZkZjFjYWI5NmYxMTg2MGYwN2VkYjFmMDgzMmM1MjVhOWUzMzMyMyJ9fX0="
+
+  canada:
+    name: "Canada"
+    series: "CA"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjI0MWE2OTdmNmRmYjFjNTdjZGEzMjdiYWE2NzMyYTc4MjhjMzk4YmU0ZWJmZGJkMTY2YzIzMmJjYWUyYiJ9fX0="
+
+  italy:
+    name: "Italy"
+    series: "IT"
+    texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODVjZTg5MjIzZmE0MmZlMDZhZDY1ZDhkNDRjYTQxMmFlODk5YzgzMTMwOWQ2ODkyNGRmZTBkMTQyZmRiZWVhNCJ9fX0="
