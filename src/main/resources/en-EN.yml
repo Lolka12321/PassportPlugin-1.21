@@ -1,38 +1,63 @@
 input:
-  name: "&eEnter &6NAME&e:"
-  surname: "&eEnter &6SURNAME&e:"
-  age: "&eEnter &6AGE&e:"
-  region: "&eEnter &6REGION&e:"
+  name: "<gradient:#A78BFA:#EC4899>Enter your</gradient> <gradient:#FBBF24:#F59E0B>NAME</gradient><gradient:#A78BFA:#EC4899>:</gradient>"
+  surname: "<gradient:#A78BFA:#EC4899>Enter your</gradient> <gradient:#FBBF24:#F59E0B>SURNAME</gradient><gradient:#A78BFA:#EC4899>:</gradient>"
+  age: "<gradient:#A78BFA:#EC4899>Enter your</gradient> <gradient:#FBBF24:#F59E0B>AGE</gradient><gradient:#A78BFA:#EC4899>:</gradient>"
+  region: "<gradient:#A78BFA:#EC4899>Enter your</gradient> <gradient:#FBBF24:#F59E0B>REGION</gradient><gradient:#A78BFA:#EC4899>:</gradient>"
 
 errors:
-  age-not-number: "&cAge must be a number!"
-  no-permission: "&cYou don't have permission!"
-  player-not-found: "&cPlayer not found!"
-  no-passport: "&cPassport not found!"
+  age-not-number: "<gradient:#FF6B6B:#EF4444>Age must be a valid number!</gradient>"
+  age-range: "<gradient:#FF6B6B:#EF4444>Age must be between %min% and %max%!</gradient>"
+  invalid-name: "<gradient:#FF6B6B:#EF4444>Invalid name! Use only letters, spaces and hyphens.</gradient>"
+  invalid-surname: "<gradient:#FF6B6B:#EF4444>Invalid surname! Use only letters, spaces and hyphens.</gradient>"
+  invalid-region: "<gradient:#FF6B6B:#EF4444>Invalid region! Use only letters, spaces and hyphens.</gradient>"
+  no-permission: "<gradient:#FF6B6B:#EF4444>You don't have permission to use this command!</gradient>"
+  player-not-found: "<gradient:#FF6B6B:#EF4444>Player not found or offline!</gradient>"
+  no-passport: "<gradient:#FF6B6B:#EF4444>You don't have a passport yet!</gradient>"
+  target-no-passport: "<gradient:#FF6B6B:#EF4444>%player% doesn't have a passport!</gradient>"
+  usage-check: "<gradient:#FF6B6B:#EF4444>Usage: /passport check <player></gradient>"
+  usage-remove: "<gradient:#FF6B6B:#EF4444>Usage: /passport remove <player></gradient>"
 
 success:
-  created: "&aPassport successfully created!"
-  reloaded: "<gradient:#00ff99:#00ccff>Language and config reloaded!</gradient>"
+  created: "<gradient:#4ADE80:#22C55E>Passport successfully created!</gradient>"
+  reloaded: "<gradient:#00ff99:#00ccff>Configuration and language reloaded!</gradient>"
+  removed: "<gradient:#4ADE80:#22C55E>Passport of player</gradient> <gradient:#FBBF24:#F59E0B>%player%</gradient> <gradient:#4ADE80:#22C55E>has been removed!</gradient>"
+  your-passport-removed: "<gradient:#FF6B6B:#EF4444>Your passport has been removed by administrator!</gradient>"
+  kicked-for-reregistration: "<gradient:#FF6B6B:#EF4444>Your passport has been removed. Reconnect to create a new one.</gradient>"
 
 help:
-  title: "&6&lPassportPlugin"
-  passport: "&e/passport &7— open your passport"
-  check: "&e/passport check <player> &7— view player's passport"
-  reload: "&e/passport reload &7— reload config and language"
+  title: "<gradient:#FBBF24:#F59E0B>&l━━━━━ PassportPlugin ━━━━━</gradient>"
+  passport: "<gradient:#A78BFA:#EC4899>/passport</gradient> <gray>— view your passport"
+  check: "<gradient:#A78BFA:#EC4899>/passport check <player></gradient> <gray>— request to view player's passport"
+  remove: "<gradient:#A78BFA:#EC4899>/passport remove <player></gradient> <gray>— remove player's passport"
+  reload: "<gradient:#A78BFA:#EC4899>/passport reload</gradient> <gray>— reload configuration and language"
+
+request:
+  question: "<gradient:#FBBF24:#F59E0B>%player%</gradient> <gray>requested to view your passport. Show it?"
+  accept-button: "<gradient:#4ADE80:#22C55E>&l[✓ ACCEPT]</gradient>"
+  deny-button: "<gradient:#FF6B6B:#EF4444>&l[✗ DENY]</gradient>"
+  sent: "<gray>Request sent to</gray> <gradient:#FBBF24:#F59E0B>%player%</gradient><gray>. Waiting for response..."
+  accepted: "<gradient:#4ADE80:#22C55E>You showed your passport.</gradient>"
+  denied: "<gradient:#FF6B6B:#EF4444>You denied the request.</gradient>"
+  target-accepted: "<gradient:#4ADE80:#22C55E>%player%</gradient> <gray>accepted! Opening passport..."
+  target-denied: "<gradient:#FF6B6B:#EF4444>%player%</gradient> <gray>denied your request."
+  no-active: "<gradient:#FF6B6B:#EF4444>You don't have any active requests!</gradient>"
+  requester-offline: "<gradient:#FF6B6B:#EF4444>The requester is offline!</gradient>"
+  timeout: "<gradient:#FF6B6B:#EF4444>Passport view request expired.</gradient>"
+  timeout-requester: "<gradient:#FF6B6B:#EF4444>%player%</gradient> <gray>didn't respond to your request."
 
 book:
-  title: "&6Passport"
-  author: "&7Government"
+  title: "<gradient:#FBBF24:#F59E0B>Passport</gradient>"
+  author: "<gray>Government"
   pages:
     - |
-      &6&lPASSPORT
-
-      &fName: &e%name%
-      &fSurname: &e%surname%
-
-      &fAge: &e%age%
-      &fRegion: &e%region%
-
-
-      &7Series: &f%series%
-      &7Number: &f%number%
+      <gradient:#FBBF24:#F59E0B>&lPASSPORT</gradient>
+      
+      <white>Name: <gradient:#A78BFA:#EC4899>%name%</gradient>
+      <white>Surname: <gradient:#A78BFA:#EC4899>%surname%</gradient>
+      
+      <white>Age: <gradient:#FBBF24:#F59E0B>%age%</gradient>
+      <white>Region: <gradient:#A78BFA:#EC4899>%region%</gradient>
+      
+      
+      <gray>Series: <white>%series%
+      <gray>Number: <white>%number%
