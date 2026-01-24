@@ -5,10 +5,16 @@ api-version: 1.21
 
 commands:
   passport:
-    description: Passport
+    description: Passport management system
+    usage: /passport [help|check|remove|reload]
 
 permissions:
   passport.check:
+    description: Request to view other player's passport
+    default: op
+  passport.remove:
+    description: Remove player's passport
     default: op
   passport.reload:
+    description: Reload plugin configuration and language
     default: op
