@@ -20,6 +20,8 @@ public class PassportTabCompleter implements TabCompleter {
             List<String> suggestions = new ArrayList<>();
 
             suggestions.add("help");
+            suggestions.add("create");
+            suggestions.add("edit");
             suggestions.add("accept");
             suggestions.add("deny");
 
