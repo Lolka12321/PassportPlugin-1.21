@@ -1,5 +1,3 @@
+# PassportPlugin Configuration
+# Supported languages: en-EN, ru-RU
 language: "en-EN"
-
-passport:
-  book:
-    use-language-file: true
