@@ -1,7 +1,6 @@
 package fellangera.passport;
 
 public class Passport {
-
     private final String name;
     private final String surname;
     private final int age;
@@ -24,4 +23,12 @@ public class Passport {
     public String getRegion() { return region; }
     public String getSeries() { return series; }
     public int getNumber() { return number; }
+
+    public String getFullName() {
+        return name + " " + surname;
+    }
+
+    public String getPassportId() {
+        return series + " " + number;
+    }
 }
