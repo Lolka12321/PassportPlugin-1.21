@@ -6,7 +6,7 @@
 ![Paper](https://img.shields.io/badge/Paper-API-blue.svg)
 ![Java](https://img.shields.io/badge/Java-22-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Version](https://img.shields.io/badge/Version-1.0-red.svg)
+![Version](https://img.shields.io/badge/Version-2.0-red.svg)
 
 **Современная система паспортов для Minecraft серверов**
 
