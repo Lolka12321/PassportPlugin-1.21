@@ -182,17 +182,6 @@ public class YourPlugin {
 - `%region%` - Country
 - `%passport_id%` - Passport series and number
 
-## 🎨 Screenshots
-
-### Create Passport
-![Create Passport GUI](https://via.placeholder.com/800x400?text=Create+Passport+GUI)
-
-### View Passport
-![View Passport GUI](https://via.placeholder.com/800x400?text=View+Passport+GUI)
-
-### Country Selection
-![Country Selection](https://via.placeholder.com/800x400?text=Country+Selection)
-
 ## 🏗️ Building from Source
 
 ```bash
@@ -205,10 +194,6 @@ mvn clean package
 
 # The compiled JAR will be in the target/ folder
 ```
-
-## 📝 Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for a complete list of changes.
 
 ## 🤝 Contributing
 
