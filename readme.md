@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Version](https://img.shields.io/badge/Version-2.0-red.svg)
 
-**Современная система паспортов для Minecraft серверов**
+**Modern passport system for Minecraft servers**
 
 [Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#-configuration) • [API](#-api)
 
@@ -18,105 +18,105 @@
 
 ## 📋 Description
 
-PassportPlugin - это продвинутый плагин для Paper 1.21.1, который добавляет полноценную систему паспортов на ваш сервер. Игроки могут создавать персонализированные паспорта с указанием имени, фамилии, возраста и страны, которые отображаются в красивом интерактивном GUI.
+PassportPlugin is an advanced plugin for Paper 1.21.1 that adds a complete passport system to your server. Players can create personalized passports with name, surname, age, and country, which are displayed in a beautiful interactive GUI.
 
 ## ✨ Features
 
-### 🎨 Современный интерфейс
-- Красивое GUI с использованием MiniMessage градиентов
-- Интерактивные кнопки и визуальные элементы
-- Поддержка текстур стран (флаги в виде голов игроков)
-- Единая цветовая палитра для удобства чтения
+### 🎨 Modern Interface
+- Beautiful GUI using MiniMessage gradients
+- Interactive buttons and visual elements
+- Country texture support (flags as player heads)
+- Unified color palette for readability
 
-### 📝 Управление паспортами
-- Создание паспорта с AnvilGUI для ввода данных
-- Редактирование существующих паспортов
-- Просмотр своего паспорта
-- Запрос на просмотр паспорта других игроков
-- Автоматическое отображение имени и возраста над головой игрока
+### 📝 Passport Management
+- Create passports with AnvilGUI for data input
+- Edit existing passports
+- View your own passport
+- Request to view other players' passports
+- Automatic display of name and age above player's head
 
-### 🌍 Система стран
-- 9 предустановленных стран (Россия, США, Германия, Франция, UK, Китай, Япония, Канада, Италия)
-- Уникальные серии паспортов для каждой страны
-- Автоматическая генерация уникальных номеров паспортов
-- Легко добавить новые страны через конфигурацию
+### 🌍 Country System
+- 9 preset countries (Russia, USA, Germany, France, UK, China, Japan, Canada, Italy)
+- Unique passport series for each country
+- Automatic generation of unique passport numbers
+- Easy to add new countries through configuration
 
-### 🔒 Система запросов
-- Администраторы могут запрашивать просмотр паспорта игрока
-- Игрок может принять или отклонить запрос
-- Интерактивные кнопки принятия/отклонения
-- Таймаут запросов через 30 секунд
+### 🔒 Request System
+- Administrators can request to view player's passport
+- Player can accept or deny the request
+- Interactive accept/deny buttons
+- Request timeout after 30 seconds
 
-### 🌐 Мультиязычность
-- Русский (ru-RU)
-- Английский (en-EN)
-- Простая система добавления новых языков
-- Все сообщения настраиваемые
+### 🌐 Multi-language
+- Russian (ru-RU)
+- English (en-EN)
+- Simple system for adding new languages
+- All messages are customizable
 
-### 🛠️ API для разработчиков
-- Простой API для получения данных паспорта
-- Поддержка плейсхолдеров
-- Легкая интеграция с другими плагинами
+### 🛠️ Developer API
+- Simple API for getting passport data
+- Placeholder support
+- Easy integration with other plugins
 
 ## 📦 Installation
 
-1. Скачайте последнюю версию плагина из [Releases](https://github.com/Lolka12321/PassportPlugin-1.21/releases)
-2. Поместите JAR файл в папку `plugins/` вашего сервера
-3. Перезапустите сервер
-4. Настройте плагин в файлах конфигурации (опционально)
+1. Download the latest version from [Releases](https://github.com/Lolka12321/PassportPlugin-1.21/releases)
+2. Place the JAR file in your server's `plugins/` folder
+3. Restart the server
+4. Configure the plugin in config files (optional)
 
 ### Requirements
 
 - **Minecraft**: 1.21.1
-- **Server**: Paper API (или форки: Purpur, Pufferfish и т.д.)
+- **Server**: Paper API (or forks: Purpur, Pufferfish, etc.)
 - **Java**: 22+
 
 ## 🎮 Commands
 
-| Команда | Описание | Права |
-|---------|----------|-------|
-| `/passport` | Просмотр своего паспорта | - |
-| `/passport create` | Создание нового паспорта | - |
-| `/passport edit` | Редактирование паспорта | - |
-| `/passport help` | Показать справку | - |
-| `/passport check <игрок>` | Запросить просмотр паспорта игрока | `passport.check` |
-| `/passport remove <игрок>` | Удалить паспорт игрока | `passport.remove` |
-| `/passport reload` | Перезагрузить конфигурацию | `passport.reload` |
-| `/passport accept` | Принять запрос на просмотр | - |
-| `/passport deny` | Отклонить запрос на просмотр | - |
+| Command | Description | Permission |
+|---------|-------------|------------|
+| `/passport` | View your passport | `passport.view` |
+| `/passport create` | Create a new passport | `passport.create` |
+| `/passport edit` | Edit your passport | `passport.edit` |
+| `/passport help` | Show help menu | `passport.help` |
+| `/passport check <player>` | Request to view player's passport | `passport.check` |
+| `/passport remove <player>` | Remove player's passport | `passport.remove` |
+| `/passport reload` | Reload configuration | `passport.reload` |
+| `/passport accept` | Accept view request | `passport.accept` |
+| `/passport deny` | Deny view request | `passport.deny` |
 
 ## 🔑 Permissions
 
-### Основные права (для игроков)
+### Basic Permissions (for players)
 
-| Право | Описание | По умолчанию |
-|-------|----------|--------------|
-| `passport.*` | Доступ ко всем основным командам | true |
-| `passport.view` | Просмотр своего паспорта | true |
-| `passport.create` | Создание нового паспорта | true |
-| `passport.edit` | Редактирование своего паспорта | true |
-| `passport.help` | Просмотр справки | true |
-| `passport.accept` | Принятие запросов на просмотр | true |
-| `passport.deny` | Отклонение запросов на просмотр | true |
+| Permission | Description | Default |
+|------------|-------------|---------|
+| `passport.*` | Access to all basic commands | true |
+| `passport.view` | View your own passport | true |
+| `passport.create` | Create a new passport | true |
+| `passport.edit` | Edit your passport | true |
+| `passport.help` | View help menu | true |
+| `passport.accept` | Accept view requests | true |
+| `passport.deny` | Deny view requests | true |
 
-### Права администратора
+### Admin Permissions
 
-| Право | Описание | По умолчанию |
-|-------|----------|--------------|
-| `passport.admin` | Доступ ко всем админ командам | OP |
-| `passport.check` | Запрос на просмотр паспортов других игроков | OP |
-| `passport.remove` | Удаление паспортов игроков | OP |
-| `passport.reload` | Перезагрузка конфигурации плагина | OP |
+| Permission | Description | Default |
+|------------|-------------|---------|
+| `passport.admin` | Access to all admin commands | OP |
+| `passport.check` | Request to view other players' passports | OP |
+| `passport.remove` | Remove players' passports | OP |
+| `passport.reload` | Reload plugin configuration | OP |
 
 ## ⚙️ Configuration
 
 ### config.yml
 
 ```yaml
-# Язык плагина (en-EN или ru-RU)
+# Plugin language (en-EN or ru-RU)
 language: "en-EN"
 
-# Настройки GUI
+# GUI settings
 gui:
   create:
     name-slot: 10
@@ -125,30 +125,30 @@ gui:
     country-slot: 16
     confirm-slot: 22
     cancel-slot: 31
-  # ... другие настройки
+  # ... other settings
 
-# Страны
+# Countries
 countries:
   russia:
     name: "Russia"
     series: "RU"
     texture: "base64_texture"
-  # ... другие страны
+  # ... other countries
 ```
 
-### Добавление новой страны
+### Adding a New Country
 
 ```yaml
 countries:
   your_country:
     name: "Your Country Name"
-    series: "YC"  # 2-буквенная серия
+    series: "YC"  # 2-letter series
     texture: "base64_encoded_skull_texture"
 ```
 
 ## 🔌 API
 
-### Использование API
+### Using the API
 
 ```java
 import fellangera.passport.api.PassportAPI;
@@ -156,73 +156,73 @@ import org.bukkit.entity.Player;
 
 public class YourPlugin {
     public void example(Player player) {
-        // Получить имя игрока из паспорта
+        // Get player's name from passport
         String name = PassportAPI.get(player, "%name%");
         
-        // Получить фамилию
+        // Get surname
         String surname = PassportAPI.get(player, "%surname%");
         
-        // Получить возраст
+        // Get age
         String age = PassportAPI.get(player, "%age%");
         
-        // Получить страну
+        // Get country
         String region = PassportAPI.get(player, "%region%");
         
-        // Получить ID паспорта (серия + номер)
+        // Get passport ID (series + number)
         String passportId = PassportAPI.get(player, "%passport_id%");
     }
 }
 ```
 
-### Доступные плейсхолдеры
+### Available Placeholders
 
-- `%name%` - Имя
-- `%surname%` - Фамилия
-- `%age%` - Возраст
-- `%region%` - Страна
-- `%passport_id%` - Серия и номер паспорта
+- `%name%` - Name
+- `%surname%` - Surname
+- `%age%` - Age
+- `%region%` - Country
+- `%passport_id%` - Passport series and number
 
 ## 🎨 Screenshots
 
-### Создание паспорта
+### Create Passport
 ![Create Passport GUI](https://via.placeholder.com/800x400?text=Create+Passport+GUI)
 
-### Просмотр паспорта
+### View Passport
 ![View Passport GUI](https://via.placeholder.com/800x400?text=View+Passport+GUI)
 
-### Выбор страны
+### Country Selection
 ![Country Selection](https://via.placeholder.com/800x400?text=Country+Selection)
 
 ## 🏗️ Building from Source
 
 ```bash
-# Клонирование репозитория
+# Clone the repository
 git clone https://github.com/Lolka12321/PassportPlugin-1.21.git
 cd PassportPlugin-1.21
 
-# Сборка с помощью Maven
+# Build with Maven
 mvn clean package
 
-# Готовый JAR будет в папке target/
+# The compiled JAR will be in the target/ folder
 ```
 
 ## 📝 Changelog
 
-См. [CHANGELOG.md](CHANGELOG.md) для полного списка изменений.
+See [CHANGELOG.md](CHANGELOG.md) for a complete list of changes.
 
 ## 🤝 Contributing
 
-Мы приветствуем вклад в развитие проекта! Если вы хотите помочь:
+We welcome contributions to the project! If you want to help:
 
-1. Форкните репозиторий
-2. Создайте ветку для новой функции (`git checkout -b feature/AmazingFeature`)
-3. Закоммитьте изменения (`git commit -m 'Add some AmazingFeature'`)
-4. Запушьте в ветку (`git push origin feature/AmazingFeature`)
-5. Откройте Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-Этот проект распространяется под лицензией MIT. См. файл [LICENSE](LICENSE) для подробностей.
+This project is distributed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## 📧 Contact
 
@@ -241,6 +241,6 @@ mvn clean package
 
 **Made with ❤️ for Minecraft community**
 
-⭐ Если вам нравится этот проект, поставьте звезду!
+⭐ If you like this project, give it a star!
 
 </div>
